@@ -20,7 +20,11 @@ object MoviesRepository {
         api = retrofit.create(TMDBApi::class.java)
     }
 
-    fun getPopularMovies(page: Int =1 ) {
+    fun getPopularMovies(
+        page: Int = 1,
+        onSuccess: (movies: List<Movie>) -> Unit,
+        onError: () -> Unit
+    ) {
         api.getPopularMovies(page = page)
             .enqueue(object : Callback<MoviesResponse> {
                 override fun onResponse(
@@ -31,15 +35,15 @@ object MoviesRepository {
                         val responseBody = response.body()
 
                         if (responseBody != null) {
-                            Log.d("Repository", "Movies: ${responseBody.movies}")
+                            onSuccess.invoke(responseBody.movies)
                         } else {
-                            Log.d("Repository", "Failed to get response")
+                            onError.invoke()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
-                    Log.e("Repository", "onFailure", t)
+                    onError.invoke()
                 }
             })
     }
