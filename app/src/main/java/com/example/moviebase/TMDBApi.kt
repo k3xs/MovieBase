@@ -15,4 +15,13 @@ interface TMDBApi {
         @Query("page")
         page: Int
     ): Call<MoviesResponse>
+
+
+    @GET("movie/top_rated")
+    fun getTopRatedMovies(
+        @Query("api_key")
+        apiKey: String = "62c10acc64aa3bd06c3ee9ac146ae91a",
+        @Query("page")
+        page: Int
+    ): Call<MoviesResponse>
 }
