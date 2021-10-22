@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">MovieBase</string>
 
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_favorites">Favorites</string>
+
     <string name="popular">Popular</string>
     <string name="most_popular">Most popular movies</string>
 
